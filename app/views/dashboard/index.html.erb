@@ -1,0 +1,168 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark"><%= t('dashboard') %></h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active"><%= t('dashboard') %></li>
+        </ol>
+      </div><!-- /.col -->
+
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-map-marker"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><%=  %></span>
+          <span class="info-box-number"><a href="/"><%=  %></a></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-road"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><%=  %></span>
+          <span class="info-box-number"><a href="/"><%=  %></a></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-water"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><%=  %></span>
+          <span class="info-box-number"><a href="/"><%=  %></a></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix hidden-md-up"></div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-tree"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><%=  %></span>
+          <span class="info-box-number"><a href="/"><%=  %></a></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-layer-group"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><%=  %></span>
+          <span class="info-box-number"><a href="/"><%=  %></a></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-map"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><%=  %></span>
+          <span class="info-box-number"><a href="/"><%=  %></a></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title"><%= t('dashboard_user_latest') %></h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+          <ul class="users-list clearfix">
+            <% @user_latest.each do |item| %>
+              <li>
+                <img src="<%= image_path('user.png') %>" alt="User Image">
+                <% if (!item.name.nil? && item.name != "") %>
+                  <a class="users-list-name" href="/users/<%= item.id %>"><%= item.name %></a>
+                <% else %>
+                  <a class="users-list-name" href="/users/<%= item.id %>"><%= item.email %></a>
+                <% end %>
+                <span class="users-list-date"><%= item.created_at.strftime("%d-%m-%Y") %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="card-footer text-center">
+          <a href="/users">Xem tất cả</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">Đăng nhập gần đây</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+          <ul class="products-list product-list-in-card pl-2 pr-2">
+            <% @user_login_latest.each do |item| %>
+              <li class="item">
+                <div class="product-img">
+                  <img src="<%= image_path('user.png') %>" alt="Product Image" class="img-size-50">
+                </div>
+                <div class="product-info">
+                  <% if (!item.name.nil? && item.name != "") %>
+                    <a class="product-title" href="/users/<%= item.id %>"><%= item.name %></a>
+                  <% else %>
+                    <a class="product-title" href="/users/<%= item.id %>"><%= item.email %></a>
+                  <% end %>
+                  <span class="product-description">
+                  <% if item.last_sign_in_at.nil? %>
+                  Chưa đăng nhập
+                    <% else %>
+                  <%= item.last_sign_in_at.strftime("%d-%m-%Y") %>
+                    <% end %>
+                      </span>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer text-center">
+          <a href="/users" class="uppercase">Xem tất cả</a>
+        </div>
+        <!-- /.card-footer -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+</section>

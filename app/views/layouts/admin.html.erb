@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>VCMS</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_pack_tag 'application' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= favicon_link_tag asset_path('favicon.ico')  %>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  <%= render "layouts/admin_header" %>
+  <%= render "layouts/admin_sidebar" %>
+  <div class="content-wrapper">
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <%= yield %>
+  </div>
+  <%= render "layouts/admin_footer" %>
+  <%= render "layouts/admin_control_sidebar" %>
+
+  <script>
+    $('form').keydown(function(event){
+      if(event.keyCode == 13) {
+        $(event).next().focus();
+        event.preventDefault();
+        return false;
+      }
+    })
+
+    function InvalidMsg(textbox, messageInput) {
+      if (textbox.value == '') {
+          textbox.setCustomValidity(messageInput);
+      }else{
+          textbox.setCustomValidity('');
+      }
+    }
+  </script>
+</div>
+</body>
+</html>

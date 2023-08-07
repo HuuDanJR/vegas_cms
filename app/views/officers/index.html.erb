@@ -1,0 +1,90 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark"><%= t('officer') %></h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active"><%= t('officer') %></li>
+        </ol>
+      </div><!-- /.col -->
+
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <div class=row>
+            <div class="col-md-6">
+              <%= form_with(url: "/officers", method: "get", local: true) do |f| %>
+                <%= f.hidden_field :page, :value => 1 %>
+                <%= f.text_field(:search, value: @search_query, placeholder: "Tìm kiếm") %>
+                <%= f.submit("Tìm kiếm") %>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <%= link_to 'Thêm mới', new_officer_path(), class: "btn btn-primary btn-smr float-sm-right" %>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+          <table id="place_list" class="table table-striped projects">
+            <thead>
+            <tr>
+              <th>TT</th>
+              <th><%= t('officer_name') %></th>
+              <th><%= t('officer_nick_name') %></th>
+              <th><%= t('officer_home_town') %></th>
+              <th><%= t('officer_language') %></th>
+              <th class="text-center">Tùy chọn</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% index = 0 %>
+            <% @officers.each do |officer| %>
+              <tr>
+                <% index = index + 1 %>
+                <td><%= index %></td>
+                <td><%= officer.name %></td>
+                <td><%= officer.nickname %></td>
+                <td><%= officer.home_town %></td>
+                <td>
+                  <% if officer.language == true %>
+                    Tiếng Việt
+                  <% else %>
+                    Tiếng Anh
+                  <% end %>
+                </td>
+                <td class="project-actions text-center">
+                  <%= link_to 'Hiển thị', officer %> 
+                  | <%= link_to 'Chỉnh sửa', edit_officer_path(officer) %> 
+                  | <%= link_to 'Xóa', officer, method: :delete, data: {confirm: 'Bạn có muốn xóa?'} %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <div class="p-2 digg_pagination">
+            <%= will_paginate @officers %>
+          </div>
+          <div class=row>
+            <div class="col-md-12">
+              <a class="btn btn-primary btn-smr float-sm-right" href="/officers/export" target="_blank">Xuất file</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

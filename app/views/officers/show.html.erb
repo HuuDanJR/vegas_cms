@@ -1,0 +1,151 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark"><%= t('officer') %></h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active"><%= t('officer') %></li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Thông tin</h3>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_name') %>:</label>
+                <p><%= @officer.name %></p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_nick_name') %>:</label>
+                <p><%= @officer.nickname %></p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_home_town') %>:</label>
+                <p><%= @officer.home_town %></p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_gender') %>:</label>
+                <p><%= @officer.gender == true ? "Nam" : "Nữ" %></p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_head_of_household') %>:</label>
+                <p><%= @officer.head_of_household %></p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_nationality') %>:</label>
+                <p><%= @officer.nationality %></p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_ethnic') %>:</label>
+                <p><%= @officer.ethnic %></p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_religion') %>:</label>
+                <p><%= @officer.religion %></p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_date_of_birth') %>:</label>
+                <p>
+                  <% if !@officer.date_of_birth.nil? %>
+                    <%= @officer.date_of_birth.strftime("%d-%m-%Y") %>
+                  <% end %>
+                </p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_revolution') %>:</label>
+                <p>
+                  <% if !@officer.date_revolution.nil? %>
+                    <%= @officer.date_revolution.strftime("%d-%m-%Y") %>
+                  <% end %>
+                </p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_status') %>:</label>
+                <p>
+                  <%= status_str(@officer.status) %>
+                </p>
+              </div>
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_date_of_sacrifice') %>:</label>
+                <p>
+                  <% if !@officer.date_of_sacrifice.nil? %>
+                    <%= @officer.date_of_sacrifice.strftime("%d-%m-%Y") %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label><%= t('officer_organization') %>:</label>
+              <p>
+                <%= @officer.organization %>
+              </p>
+            </div>
+            <div class="form-group">
+              <label><%= t('officer_position') %>:</label>
+              <p>
+                <%= @officer.position %>
+              </p>
+            </div>
+            <div class="form-group">
+              <label><%= t('officer_story') %>:</label>
+              <textarea readonly class="form-control" name="officerObject[officer_language_vi][story]" rows="5"><%= @officer.story %></textarea>
+            </div>
+            <div class="form-group">
+              <label><%= t('officer_note') %>:</label>
+              <textarea readonly class="form-control" name="officerObject[officer_language_vi][note]"><%= @officer.note %></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label><%= t('title_attach') %>:</label>
+                <div class="list-img">
+                  <% for i in 0..(@officer.attachments.length - 1) %>
+                    <% if @officer.attachments[i].category == 1 %>
+                      <div>
+                        <img src="/attachments/download/<%= @officer.attachments[i].id %>" width="100" height="100">
+                      </div>
+                    <% else %>
+                      <div>
+                        <a href="/attachments/download/<%= @officer.attachments[i].id %>" target="_blank"><%= officerObject['officer_attachments'][i].name %></a>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <%= link_to 'Cập nhật', edit_officer_path(@officer), class: "btn btn-success float-right" %>
+        <%= link_to 'Trở về', officers_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</section>

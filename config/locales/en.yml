@@ -1,0 +1,227 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    attributes:
+      map:
+        name: "Tên "
+      place:
+        name: "Tên "
+      zone:
+        name: "Tên "
+      river:
+        name: "Tên "
+      street:
+        name: "Tên "
+      plant:
+        name: "Tên "
+      user:
+        current_password: "Mật khẩu hiện tại "
+        name: "Tên "
+    errors:
+      models:
+        map:
+          attributes:
+            name:
+              blank: "không được để trống"
+        place:
+          attributes:
+            name:
+              blank: "không được để trống"
+        zone:
+          attributes:
+            name:
+              blank: "không được để trống"
+        river:
+          attributes:
+            name:
+              blank: "không được để trống"
+        street:
+          attributes:
+            name:
+              blank: "không được để trống"
+        plant:
+          attributes:
+            name:
+              blank: "không được để trống"
+        user:
+          attributes:
+            current_password:
+              blank: "không được để trống"
+            name:
+              blank: "không được để trống"
+  error_403_info: "Tài khoản của bạn không có quyền truy cập. Vui lòng liên hệ với quản trị viên hoặc thử lại."
+  error_404_info: "Trang website mà bạn tìm kiếm không tồn tại."
+  error_422_info: "Yêu cầu của bạn không đúng. Vui lòng liên hệ với quản trị viên hoặc thử lại."
+  error_500_info: "Đã xảy ra lỗi. Vui lòng liên hệ với quản trị viên hoặc thử lại."
+  record_not_found: "Không tìm thấy đối tượng"
+
+  action_show: "Hiển thị"
+  action_edit: "Cập nhật"
+  action_destroy: "Xoá"
+  action_confirm_destroy: "Bạn có chắc muốn xoá?"
+  action_new: "Thêm mới"
+
+  title_gis: "Toạ độ"
+  title_lat: "Vĩ độ"
+  title_lng: "Kinh độ"
+  title_attach: "Đính kèm"
+  title_ordinal: "Thứ tự"
+
+  user: "Người dùng"
+  user_email: "Email"
+  user_created_at: "Ngày tạo"
+  user_new: "Thêm mới người dùng"
+  user_edit: "Cập nhật người dùng"
+  user_status: "Trạng thái"
+  user_activated: "Đã kích hoạt"
+  user_inactivated: "Chưa kích hoạt"
+  user_change_password: "Thay đổi mật khẩu"
+  user_reset_password: "Đặt lại mật khẩu"
+  user_name: "Tên"
+  user_birthday: "Ngày sinh"
+  user_locked: "Khoá"
+  user_unlocked: "Mở khoá"
+
+  place: "Địa điểm"
+  place_name: "Tên địa điểm"
+  place_description: "Mô tả"
+  place_department: "Đơn vị"
+  place_form: "Hình thức"
+  place_type: "Loại địa điểm"
+  place_area: "Diện tích"
+  place_contact: "Liên hệ"
+  place_phone: "Điện thoại"
+  place_email: "Email"
+  place_ward_id: "Phường, xã"
+  place_note: "Ghi chú"
+  place_attachment: "Đính kèm"
+  place_create_success: "Địa danh, địa điểm được tạo mới thành công"
+  place_update_success: "Địa danh, địa điểm được cập nhật thành công"
+  place_delete_success: "Địa danh, địa điểm được xoá thành công"
+
+  street: "Đường nội bộ"
+  street_name: "Tên đường"
+  street_description: "Mô tả"
+  street_width: "Chiều rộng"
+  street_length: "Chiều dài"
+  street_type: "Loại đường"
+  street_note: "Ghi chú"
+  street_phone: "Điện thoại"
+  street_create_success: "Đường nội bộ được tạo mới thành công"
+  street_update_success: "Đường nội bộ được cập nhật thành công"
+  street_delete_success: "Đường nội bộ được xoá thành công"
+
+  plant: "Thực vật"
+  plant_name: "Tên thực vật"
+  plant_description: "Mô tả"
+  plant_department: "Đơn vị"
+  plant_type: "Loại"
+  plant_area: "Diện tích"
+  plant_note: "Ghi chú"
+  plant_create_success: "Thực vật được tạo mới thành công"
+  plant_update_success: "Thực vật được cập nhật thành công"
+  plant_delete_success: "Thực vật được xoá thành công"
+
+  zone: "Phân khu chức năng"
+  zone_name: "Tên"
+  zone_description: "Mô tả"
+  zone_department: "Đơn vị"
+  zone_type: "Loại"
+  zone_area: "Diện tích"
+  zone_note: "Ghi chú"
+  zone_create_success: "Phân khu chức năng được tạo mới thành công"
+  zone_update_success: "Phân khu chức năng được cập nhật thành công"
+  zone_delete_success: "Phân khu chức năng được xoá thành công"
+
+  river: "Sông, hồ"
+  river_name: "Tên"
+  river_description: "Mô tả"
+  river_department: "Đơn vị"
+  river_type: "Loại"
+  river_area: "Diện tích"
+  river_note: "Ghi chú"
+  river_create_success: "Sông, hồ được tạo mới thành công"
+  river_update_success: "Sông, hồ được cập nhật thành công"
+  river_delete_success: "Sông, hồ được xoá thành công"
+
+  map: "Bản đồ nền"
+  map_name: "Tên"
+  map_description: "Mô tả"
+  map_department: "Đơn vị"
+  map_address: "Địa chỉ"
+  map_area: "Diện tích"
+  map_note: "Ghi chú"
+  map_create_success: "Bản đồ nền được tạo mới thành công"
+  map_update_success: "Bản đồ nền được cập nhật thành công"
+  map_delete_success: "Bản đồ nền được xoá thành công"
+
+  group: "Nhóm người dùng"
+  group_name: "Tên nhóm"
+  group_description: "Mô tả"
+
+  role: "Quyền người dùng"
+  role_name: "Tên quyền"
+  role_description: "Mô tả"
+  role_action: "Hành động"
+  role_resource: "Đối tượng"
+
+  file_import_not_found: "Vui lòng chọn file cần import."
+  file_import_success: "Import file thành công."
+
+  dashboard: "Dashboard"
+  dashboard_user_latest: "Người dùng mới nhất"
+
+  officer: "Cán bộ"
+  officer_name: "Tên"
+  officer_nick_name: "Bí danh"
+  officer_description: "Mô tả"
+  officer_home_town: "Quê quán"
+  officer_date_of_birth: "Ngày sinh"
+  officer_revolution: "Ngày tham gia cách mạng"
+  officer_date_of_sacrifice: "Ngày hy sinh / mất"
+  officer_gender: "Giới tính"
+  officer_nationality: "Quốc tịch"
+  officer_ethnic: "Dân tộc"
+  officer_religion: "Tôn giáo"
+  officer_head_of_household: "Thông tin chủ hộ công dân"
+  officer_language: "Ngôn ngữ"
+  officer_organization: "Đơn vị"
+  officer_position: "Chức vụ"
+  officer_story: "Tiểu sử"
+  officer_note: "Ghi chú"
+  officer_status: "Trạng thái"
+  officer_create_success: "Cán bộ được tạo mới thành công"
+  officer_update_success: "Cán bộ được cập nhật thành công"
+  officer_delete_success: "Cán bộ được xoá thành công"
+  officer_related_id: "Bản dịch của cán bộ"
+  officer_language_title: "Chọn ngôn ngữ nhập"

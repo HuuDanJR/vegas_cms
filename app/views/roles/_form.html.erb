@@ -1,0 +1,56 @@
+<%= form_with(model: role, local: true) do |form| %>
+  <div class="row">
+    <% if role.errors.any? %>
+      <div class="col-md-12" id="error_explanation">
+        <h4>Có <%= pluralize(role.errors.count, "lỗi") %> lỗi đang xảy ra:</h4>
+
+        <ul>
+          <% role.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Thông tin</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+<!--          <div class="field">-->
+            <%#= form.label :name %>
+            <%#= form.text_field :name %>
+<!--          </div>-->
+
+          <div class="field">
+            <%= form.label :action %>
+            <%= form.select :action, options_for_select(@actions, @role.action), {}, {class: "form-control"} %>
+          </div>
+
+          <div class="field">
+            <%= form.label :resource %>
+            <%= form.select :resource, options_for_select(@resources, @role.resource), {}, {class: "form-control"} %>
+          </div>
+
+          <div class="field">
+            <%= form.label :description %>
+            <%= form.text_area :description %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= link_to 'Back', roles_path, class: "btn btn-secondary" %>
+      <button type="submit" class="btn btn-success float-right">Lưu</button>
+    </div>
+  </div>
+<% end %>

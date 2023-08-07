@@ -1,0 +1,136 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="/" class="brand-link nav-logo-admin" data-turbolinks="false">
+    <img src="<%= image_path('logo.png') %>" alt="VCMS" class="brand-image img-circle elevation-3"
+         style="opacity: .8">
+    <span class="brand-text text-logo-admin">VCMS</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="<%= image_path('user.png') %>" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <% if current_user %>
+          <a href="#" class="d-block"><%= current_user.name == "" ? current_user.email : current_user.name %></a>
+        <% else %>
+          <a href="#" class="d-block"> Người dùng</a>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <% if current_user.role? "index_dashboard" %>
+          <li class="nav-item">
+            <a href="/dashboard" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+        <% end %>
+        <li class="nav-item has-treeview menu">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-database"></i>
+            <p>
+              Quản lý dữ liệu
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <% if current_user.role? "index_roulettes" %>
+              <li class="nav-item">
+                <a href="/roulettes" class="nav-link">
+                  <i class="fas fa-map-marker nav-icon"></i>
+                  <p>Roulette PID</p>
+                </a>
+              </li>
+            <% end %>
+            <% if current_user.role? "index_officers" %>
+              <li class="nav-item">
+                <a href="/officers" class="nav-link">
+                  <i class="nav-icon fas fa-user-tag"></i>
+                  <p>Tiểu sử cán bộ</p>
+                </a>
+              </li>
+            <% end %>
+            </tr>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview menu">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Quản trị hệ thống
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <% if current_user.role? "index_users" %>
+              <li class="nav-item">
+                <a href="/users" class="nav-link">
+                  <i class="fas fa-user nav-icon"></i>
+                  <p>Người dùng</p>
+                </a>
+              </li>
+            <% end %>
+            <% if current_user.role? "index_groups" %>
+              <li class="nav-item">
+                <a href="/groups" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Nhóm người dùng</p>
+                </a>
+              </li>
+            <% end %>
+            <% if current_user.role? "index_roles" %>
+              <li class="nav-item">
+                <a href="/roles" class="nav-link">
+                  <i class="fas fa-user-shield nav-icon"></i>
+                  <p>Quyền người dùng</p>
+                </a>
+              </li>
+            <% end %>
+            <% if current_user.role? "index_applications" %>
+              <li class="nav-item">
+                <a href="/oauth/applications" class="nav-link">
+                  <i class="fas fa-mobile nav-icon"></i>
+                  <p>OAuth Applications</p>
+                </a>
+              </li>
+            <% end %>
+            </tr>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+<script>
+    $(document).on("turbolinks:load", function () {
+        var url = window.location
+
+        $("ul.nav-sidebar a").filter(toggleNavSidebar);
+        $("ul.nav-treeview a").filter(toggleNavTreeview);
+
+        function toggleNavSidebar() {
+            if (this.href != url) return
+
+            $(this).addClass("active")
+        }
+
+        function toggleNavTreeview() {
+            if (this.href != url) return
+
+            $(this).parentsUntil(".nav-sidebar > .nav-treeview")
+                .addClass("menu-open").prev("a").addClass("active");
+        }
+    })
+</script>

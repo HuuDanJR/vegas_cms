@@ -1,0 +1,146 @@
+en:
+  activerecord:
+    attributes:
+      doorkeeper/application:
+        name: "Tên"
+        redirect_uri: "URI chuyển hướng"
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: "không thể chứa một phân mảnh."
+              invalid_uri: "phải là một URI hợp lệ."
+              unspecified_scheme: "phải chỉ định một lược đồ."
+              relative_uri: "phải là một URI tuyệt đối."
+              secured_uri: "phải là URI HTTPS / SSL."
+              forbidden_uri: "bị cấm bởi máy chủ."
+            scopes:
+              not_match_configured: "không khớp với cấu hình trên máy chủ."
+
+  doorkeeper:
+    applications:
+      confirmations:
+        destroy: "Bạn có chắc không?"
+      buttons:
+        edit: "Chỉnh sửa"
+        destroy: "Xóa"
+        submit: "Gửi"
+        cancel: "Hủy bỏ"
+        authorize: "Chứng thực"
+      form:
+        error: "Rất tiếc! Kiểm tra biểu mẫu của bạn để biết lỗi có thể xảy ra "
+      help:
+        confidential: "Ứng dụng sẽ được sử dụng ở nơi có thể giữ bí mật của khách hàng. Ứng dụng dành cho thiết bị di động gốc và Ứng dụng trang đơn được coi là không bảo mật. "
+        redirect_uri: "Sử dụng một dòng cho mỗi URI"
+        blank_redirect_uri: "Để trống nếu bạn đã định cấu hình nhà cung cấp của mình để sử dụng Thông tin đăng nhập khách hàng, Thông tin đăng nhập mật khẩu chủ sở hữu tài nguyên hoặc bất kỳ loại tài trợ nào khác không yêu cầu URI chuyển hướng."
+        scopes: "Các phạm vi riêng biệt bằng dấu cách. Để trống để sử dụng phạm vi mặc định. "
+      edit:
+        title: "Chỉnh sửa ứng dụng"
+      index:
+        title: "Ứng dụng của bạn"
+        new: "Ứng dụng Mới"
+        name: "Name"
+        callback_url: "URL gọi lại"
+        confidential: "Bí mật?"
+        actions: "Hành động"
+        confidentiality:
+          "yes": "Yes"
+          "no": "No"
+      new:
+        title: "New Application"
+      show:
+        title: "Application: %{name}"
+        application_id: "UID"
+        secret: "Secret"
+        secret_hashed: "Secret hashed"
+        scopes: "Scopes"
+        confidential: "Confidential"
+        callback_urls: "Callback urls"
+        actions: "Actions"
+        not_defined: "Not defined"
+
+    authorizations:
+      buttons:
+        authorize: "Authorize"
+        deny: "Deny"
+      error:
+        title: "An error has occurred"
+      new:
+        title: "Authorization required"
+        prompt: "Authorize %{client_name} to use your account?"
+        able_to: "This application will be able to"
+      show:
+        title: "Authorization code"
+
+    authorized_applications:
+      confirmations:
+        revoke: "Are you sure?"
+      buttons:
+        revoke: "Revoke"
+      index:
+        title: "Your authorized applications"
+        application: "Application"
+        created_at: "Created At"
+        date_format: "%Y-%m-%d %H:%M:%S"
+
+    pre_authorization:
+      status: "Pre-authorization"
+
+    errors:
+      messages:
+        # Common error messages
+        invalid_request:
+          unknown: "Yêu cầu thiếu thông số bắt buộc, bao gồm giá trị thông số không được hỗ trợ hoặc có định dạng khác."
+          missing_param: "Thiếu tham số bắt buộc: %{value}."
+          not_support_pkce: "Tham số code_verifier không hợp lệ. Máy chủ không hỗ trợ pkce. "
+          request_not_authorized: "Yêu cầu cần được ủy quyền. Tham số bắt buộc cho yêu cầu ủy quyền bị thiếu hoặc không hợp lệ."
+        invalid_redirect_uri: "Chuyển hướng được yêu cầu không đúng định dạng hoặc không khớp với URI chuyển hướng ứng dụng khách."
+        unauthorized_client: "Khách hàng không được phép thực hiện yêu cầu này bằng phương pháp này."
+        access_denied: "Chủ sở hữu tài nguyên hoặc máy chủ ủy quyền đã từ chối yêu cầu."
+        invalid_scope: "Phạm vi được yêu cầu không hợp lệ, không xác định hoặc không đúng định dạng."
+        invalid_code_challenge_method: "Phương thức thử thách mã phải thuần túy hoặc S256."
+        server_error: "Máy chủ ủy quyền gặp phải tình trạng không mong muốn khiến nó không thể thực hiện yêu cầu."
+        temporarily_unavailable: "Máy chủ ủy quyền hiện không thể xử lý yêu cầu do máy chủ tạm thời quá tải hoặc bảo trì."
+
+        # Configuration error messages
+        credential_flow_not_configured: "Luồng thông tin đăng nhập mật khẩu chủ sở hữu tài nguyên không thành công do Doorkeeper.configure.resource_owner_from_credentials chưa được định cấu hình."
+        resource_owner_authenticator_not_configured: "Không tìm thấy Chủ sở hữu tài nguyên do Doorkeeper.configure.resource_owner_authenticator chưa được định cấu hình."
+        admin_authenticator_not_configured: "Quyền truy cập vào bảng điều khiển quản trị bị cấm do Doorkeeper.configure.admin_authenticator chưa được định cấu hình."
+
+        # Access grant errors
+        unsupported_response_type: "Máy chủ ủy quyền không hỗ trợ loại phản hồi này."
+
+        # Access token errors
+        invalid_client: "Xác thực ứng dụng khách không thành công do ứng dụng khách không xác định, không có xác thực ứng dụng khách nào được bao gồm hoặc phương pháp xác thực không được hỗ trợ."
+        invalid_grant: "The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."
+        unsupported_grant_type: "The authorization grant type is not supported by the authorization server."
+
+        invalid_token:
+          revoked: "Mã thông báo truy cập đã bị thu hồi"
+          expired: "Mã thông báo truy cập đã hết hạn"
+          unknown: "Mã thông báo truy cập không hợp lệ"
+        revoke:
+          unauthorized: "Bạn không được phép thu hồi mã thông báo này"
+
+    flash:
+      applications:
+        create:
+          notice: "Ứng dụng đã được tạo."
+        destroy:
+          notice: "Ứng dụng đã xóa."
+        update:
+          notice: "Ứng dụng đã được cập nhật."
+      authorized_applications:
+        destroy:
+          notice: "Ứng dụng đã được thu hồi."
+
+    layouts:
+      admin:
+        title: "Doorkeeper"
+        nav:
+          oauth2_provider: "OAuth2 Provider"
+          applications: "Applications"
+          home: "Home"
+      application:
+        title: "OAuth authorization required"

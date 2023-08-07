@@ -1,0 +1,22 @@
+en:
+  doorkeeper:
+    scopes:
+      openid: "Xác thực tài khoản của bạn"
+      profile: "Xem thông tin hồ sơ của bạn"
+      email: "Xem địa chỉ email của bạn"
+      address: "Xem địa chỉ thực của bạn"
+      phone: "Xem số điện thoại của bạn"
+    errors:
+      messages:
+        login_required: "Máy chủ ủy quyền yêu cầu xác thực người dùng cuối"
+        consent_required: "Máy chủ ủy quyền yêu cầu sự đồng ý của người dùng cuối"
+        interaction_required: "Máy chủ ủy quyền yêu cầu tương tác của người dùng cuối"
+        account_selection_required: "Máy chủ ủy quyền yêu cầu lựa chọn tài khoản người dùng cuối"
+    openid_connect:
+      errors:
+        messages:
+          # Configuration error messages
+          resource_owner_from_access_token_not_configured: "Failure due to Doorkeeper::OpenidConnect.configure.resource_owner_from_access_token missing configuration."
+          auth_time_from_resource_owner_not_configured: "Failure due to Doorkeeper::OpenidConnect.configure.auth_time_from_resource_owner missing configuration."
+          reauthenticate_resource_owner_not_configured: "Failure due to Doorkeeper::OpenidConnect.configure.reauthenticate_resource_owner missing configuration."
+          subject_not_configured: "ID Token generation failed due to Doorkeeper::OpenidConnect.configure.subject missing configuration."

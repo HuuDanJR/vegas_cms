@@ -1,0 +1,121 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark"><%= t('user') %></h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active"><%= t('user') %></li>
+        </ol>
+      </div><!-- /.col -->
+
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+        <div class=row>
+          <!--          <h3 class="card-title">Danh sách</h3>-->
+          <div class="col-md-6">
+          <%= form_with(url: "/users", method: "get", local: true) do |f| %>
+            <%= f.hidden_field :page, :value => 1 %>
+            <%= f.text_field(:search, value: @search_query, placeholder: "Tìm kiếm") %>
+            <%= f.submit("Tìm kiếm") %>
+          <% end %>
+          </div>
+          <div class="col-md-6">
+          <%= link_to 'Thêm mới', new_user_path(), class: "btn btn-primary btn-smr float-sm-right" %>
+          </div>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+          <table id="user_list" class="table table-striped projects">
+            <thead>
+            <tr>
+              <th>TT</th>
+              <th><%= t('user_email') %></th>
+              <th><%= t('user_name') %></th>
+              <th><%= t('user_birthday') %></th>
+              <th><%= t('group') %></th>
+              <th><%= t('user_created_at') %></th>
+              <th><%= t('user_status') %></th>
+              <th class="text-center">Tùy chọn</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% index = 0 %>
+            <% @users.each do |user| %>
+              <tr>
+                <% index = index + 1 %>
+                <td><%= ++index %></td>
+                <td><%= user.email %></td>
+                <td><%= user.name %></td>
+                <td>
+                  <% if user.birthday %>
+                    <%= user.birthday.strftime("%d-%m-%Y") %>
+                  <% end %>
+                </td>
+                <td>
+                  <% user.groups.each do |item| %>
+                    <%= item.name %>
+                  <% end %>
+                </td>
+                <td><%= user.created_at.strftime("%d-%m-%Y") %></td>
+                <td>
+                  <% if user.confirmed_at %>
+                    <%= t('user_activated') %>
+                  <% else %>
+                    <a href="/users/<%= user.id %>/activated" data-toggle="tooltip" title="Kích hoạt">
+                      <%= t('user_inactivated') %>
+                    </a>
+                  <% end %>
+                  <br>
+                  <% if user.access_locked? %>
+                    <a href="/users/<%= user.id %>/unlocked" data-toggle="tooltip" title="Mở khoá tài khoản">
+                      <%= t('user_unlocked') %>
+                    </a>
+                  <% else %>
+                    <a href="/users/<%= user.id %>/locked" data-toggle="tooltip" title="Khoá tài khoản">
+                      <%= t('user_locked') %>
+                    </a>
+                  <% end %>
+                </td>
+                <td class="project-actions text-center">
+                  <%= link_to t("action_show"), user %> |
+                  <a href="/users/<%= user.id %>/change-password">
+                    <%= t("user_change_password") %>
+                  </a> |
+                  <a href="/users/<%= user.id %>/reset-password" data-toggle="tooltip" title="Kích hoạt">
+                    <%= t('user_reset_password') %>
+                  </a> |
+                  <a href="/users/<%= user.id %>/edit" title="Cập nhật">
+                    <i class="fas fa-pencil-alt"></i>
+                      <%= link_to t("action_edit"), edit_user_path(user) %>
+                  </a> &nbsp;
+                  <a href="#" title="Xóa">
+                    <i class="fas fa-trash"></i>
+                    <%= link_to t("action_destroy"), user, method: :delete, data: {confirm: t("action_confirm_destroy")} %>
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <div class="p-2 digg_pagination">
+            <%= will_paginate @users %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,203 @@
+<%= form_with(model: officer, local: true) do |form| %>
+  <div class="row">
+    <% if officer.errors.any? %>
+      <div class="col-md-12" id="error_explanation">
+        <h4>Có <%= pluralize(officer.errors.count, "lỗi") %> đang xảy ra:</h4>
+        <ul>
+          <% officer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Thông tin</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <% if action_name == 'new' %>
+            <div id="lang" class="form-row">
+              <div class="form-group col-sm-3">
+                <label><%= t('officer_language_title') %>:</label>
+                <select class="form-control select2" onchange="getval(this);" name="officer[language]" id="language">
+                  <option value="1">Tiếng Việt</option>
+                  <option value="0">Tiếng Anh</option>
+                </select>
+              </div>
+              <div id="showRef" class="form-group col-sm-3">
+                <%= form.label t('officer_related_id') %>
+                <%= form.select :related_id, options_from_collection_for_select(@officerRef, :id, :name, @officer.related_id), {:include_blank => '-- Select --'}, {class: "form-control select2"} %>
+              </div>
+            </div>
+          <% else %>
+            <div class="form-row">
+              <div id="text-lang" class="form-group col-sm-12">
+              </div>
+            </div>
+          <% end %>
+          <div class="form-row">
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_name') %>:</label>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_nick_name') %>:</label>
+              <%= form.text_field :nickname, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_home_town') %>:</label>
+              <%= form.text_field :home_town, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_gender') %>:</label>
+              <div class="gender-item">
+                <%= form.radio_button :gender, true %> Nam
+                <%= form.radio_button :gender, false %>Nữ
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_head_of_household') %>:</label>
+              <%= form.text_field :head_of_household, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_nationality') %>:</label>
+              <%= form.text_field :nationality, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_ethnic') %>:</label>
+              <%= form.text_field :ethnic, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_religion') %>:</label>
+              <%= form.text_field :religion, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_date_of_birth') %>:</label>
+              <%= form.date_field :date_of_birth, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_revolution') %>:</label>
+              <%= form.date_field :date_revolution, class: "form-control" %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_status') %>:</label>
+              <%= form.select :status, options_for_select([["Còn sống", 1], ["Đã mất", 2], ["Mất tích", 3]], officer.status), {}, {class: "form-control"} %>
+            </div>
+            <div class="form-group col-sm-3">
+              <label><%= t('officer_date_of_sacrifice') %>:</label>
+              <% if officer.status == 2 %>
+                <%= form.date_field :date_of_sacrifice, class: "form-control" %>
+              <% else %>
+                <% officer.date_of_sacrifice = nil %>
+                <%= form.date_field :date_of_sacrifice, class: "form-control" %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><%= t('officer_organization') %>:</label>
+            <%= form.text_field :organization, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label><%= t('officer_position') %>:</label>
+            <%= form.text_field :position, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label><%= t('officer_story') %>:</label>
+            <%= form.text_area :story, rows: 5, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label><%= t('officer_note') %>:</label>
+            <%= form.text_area :note, rows: 2, class: "form-control" %>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <%= form.label t('title_attach') %>
+              <div class="list-img">
+                <% for i in 0..(@officer.attachments.length - 1) %>
+                  <% if @officer.attachments[i].category == 1 %>
+                    <div>
+                      <img src="/attachments/download/<%= @officer.attachments[i].id %>" width="100" height="100">
+                      <div class="delete-img" onclick="delete_att(this,'<%= @officer.attachments[i].id %>')">x</div>
+                    </div>
+                  <% else %>
+                    <div>
+                      <a href="/attachments/download/<%= @officer.attachments[i].id %>" target="_blank"><%= officerObject['officer_attachments'][i].name %></a>
+                      <div class="delete-img" onclick="delete_att(this,'<%= @officer.attachments[i].id %>')">x</div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+              <%= form.file_field :attachment, :multiple => true, accept: ENV['FILE_UPLOAD_ACCEPT'], class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= link_to 'Back', officers_path, class: "btn btn-secondary" %>
+      <button type="submit" class="btn btn-success float-right">Lưu</button>
+    </div>
+  </div>
+<% end %>
+
+<script>
+    function delete_att(othis, id) {
+        if (confirm('Bạn có muốn xoá?')) {
+            $.ajax({
+                url: `/attachments/${id}`,
+                type: "DELETE",
+                dataType: "json",
+                success: function (data) {
+                    $(othis).parent().remove();
+                }
+            });
+        }
+    }
+
+    $('#showRef').hide();
+    $('#text-lang').hide();
+
+    $(document).ready(function () {
+        var url = window.location.pathname;
+        var arr_path = url.split('/');
+        var id = arr_path[2];
+        if (arr_path.length > 3) {
+            if (id != 'new') {
+                $('#lang').hide();
+                $('#text-lang').show();
+                var language = '<%= @officer.language %>';
+                var textLang = 'Ngôn ngữ Tiếng Việt';
+                if (language == 'false') {
+                    textLang = 'Ngôn ngữ Tiếng Anh';
+                }
+                $('#text-lang').append('<label>' + textLang + '</label>');
+            }
+        }
+    });
+
+    function getval(sel) {
+        if (sel.value == 0) {
+            $('#showRef').show();
+        } else {
+            $('#showRef').hide();
+        }
+    }
+</script>

@@ -1,0 +1,56 @@
+<%= form_with(model: roulette, local: true) do |form| %>
+  <div class="row">
+    <% if roulette.errors.any? %>
+      <div class="col-md-12" id="error_explanation">
+        <h4><%= pluralize(roulette.errors.count, "error") %> prohibited this roulette from being saved:</h4>
+
+        <ul>
+          <% roulette.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Information</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="field">
+            <%= form.label :name %>
+            <%= form.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= form.label :description %>
+            <%= form.text_field :description %>
+          </div>
+
+          <div class="field">
+            <%= form.label :streaming_url %>
+            <%= form.text_field :streaming_url %>
+          </div>
+
+          <div class="field">
+            <%= form.label :publish %>
+            <%= form.check_box :publish %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= link_to 'Back', roulettes_path, class: "btn btn-secondary" %>
+      <button type="submit" class="btn btn-success float-right">Save</button>
+    </div>
+  </div>
+<% end %>
